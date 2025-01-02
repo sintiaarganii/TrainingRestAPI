@@ -19,6 +19,10 @@ var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
 );
 
 builder.Services.AddScoped<CustomerServices>();
+builder.Services.AddScoped<ItemServices>();
+
+
+
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
