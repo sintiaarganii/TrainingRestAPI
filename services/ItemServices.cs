@@ -16,6 +16,15 @@ namespace Training2.services
             var datas = _context.Items.ToList();
             return datas;
         }
+        public Item GetById(int id)
+        {
+            var IdItem = _context.Items.FirstOrDefault(x => x.Id == id);
+            if (IdItem != null)
+            {
+                return IdItem;
+            }
+            return null;
+        }
 
         public bool AddItem(Item item)
         {
@@ -31,18 +40,18 @@ namespace Training2.services
             }
         }
 
-        public bool UpdateCustomer(Customer customer)
+        public bool UpdateItem(Item item)
         {
             try
             {
-                var customerOld = _context.Customers.Where(x => x.id == customer.id).FirstOrDefault();
-                if (customerOld != null)
+                var ItemOld = _context.Items.Where(x => x.Id == item.Id).FirstOrDefault();
+                if (ItemOld != null)
                 {
-                    customerOld.nama = customer.nama;
-                    customerOld.alamat = customer.alamat;
-                    customerOld.city = customer.city;
-                    customerOld.PhoneNumber = customer.PhoneNumber;
-
+                    ItemOld.ItemName = item.ItemName;
+                    ItemOld.Quantity = item.Quantity;
+                    ItemOld.DateExp = item.DateExp;
+                    ItemOld.Supplier = item.Supplier;
+                    ItemOld.AddressSupp = item.AddressSupp;
 
                     _context.SaveChanges();
 
@@ -56,15 +65,15 @@ namespace Training2.services
             }
         }
 
-        public bool DeleteCustomer(int id)
+        public bool DeleteItem(int id)
         {
             try
             {
-                var customerData = _context.Customers.FirstOrDefault(x => x.id == id);
+                var ItemData = _context.Items.FirstOrDefault(x => x.Id == id);
 
-                if (customerData != null)
+                if (ItemData != null)
                 {
-                    _context.Customers.Remove(customerData);
+                    _context.Items.Remove(ItemData);
                     _context.SaveChanges();
                     return true;
                 }

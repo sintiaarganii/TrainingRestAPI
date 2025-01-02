@@ -134,9 +134,25 @@
   },
   {
     "ContainingType": "Training2.Controllers.ItemController",
-    "Method": "Post",
+    "Method": "Get",
     "RelativePath": "api/Item/{id}",
     "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Training2.Controllers.ItemController",
+    "Method": "Put",
+    "RelativePath": "api/Item/{id}",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -155,33 +171,6 @@
   },
   {
     "ContainingType": "Training2.Controllers.ItemController",
-    "Method": "Put",
-    "RelativePath": "api/Item/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "value",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Training2.Controllers.ItemController",
     "Method": "Delete",
     "RelativePath": "api/Item/{id}",
     "HttpMethod": "DELETE",
@@ -194,13 +183,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Training2.Controllers.WeatherForecastController",

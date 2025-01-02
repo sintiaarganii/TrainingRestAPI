@@ -30,10 +30,15 @@ namespace Training2.Controllers
 
         // GET api/<ItemController>/5
         [HttpGet("{id}")]
-        //public IActionResult Get(int id)
-        //{
-           
-        //}
+        public IActionResult Get(int id)
+        {
+            var showId = _services.GetById(id);
+            if (showId != null)
+            {
+                return Ok(showId);
+            }
+            return BadRequest("Id Not Found");
+        }
 
         // POST api/<ItemController>
         [HttpPost]
@@ -49,14 +54,42 @@ namespace Training2.Controllers
 
         // PUT api/<ItemController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(Item item)
         {
+            try
+            {
+                var update = _services.UpdateItem(item);
+                if (update)
+                {
+                    return Ok("success");
+                }
+
+                return BadRequest("Id Not Found");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message.ToString());
+                throw;
+            }
         }
 
         // DELETE api/<ItemController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                var DeleteItem = _services.DeleteItem(id);
+                if (DeleteItem)
+                {
+                    return Ok("success");
+                }
+                return BadRequest("Id Not Found");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
