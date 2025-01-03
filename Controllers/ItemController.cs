@@ -47,9 +47,9 @@ namespace Training2.Controllers
             var insertItem = _services.AddItem(item);
             if (insertItem)
             {
-                return Ok("insert Customer success");
+                return Ok("Insert Item success");
             }
-            return BadRequest("insert Customer failed");
+            return BadRequest("Insert Item failed");
         }
 
         // PUT api/<ItemController>/5
@@ -61,7 +61,7 @@ namespace Training2.Controllers
                 var update = _services.UpdateItem(item);
                 if (update)
                 {
-                    return Ok("success");
+                    return Ok("Success");
                 }
 
                 return BadRequest("Id Not Found");
@@ -82,7 +82,7 @@ namespace Training2.Controllers
                 var DeleteItem = _services.DeleteItem(id);
                 if (DeleteItem)
                 {
-                    return Ok("success");
+                    return Ok("Success");
                 }
                 return BadRequest("Id Not Found");
             }
