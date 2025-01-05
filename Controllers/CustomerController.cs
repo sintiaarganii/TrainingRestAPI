@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Training2.Models;
 using Training2.Models.DB;
 using Training2.services;
 
@@ -22,8 +23,28 @@ namespace Training2.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var customerList = _services.GetListCustomers();
-            return Ok(customerList);
+            try
+            {
+                var customerList = _services.GetListCustomers();
+                var response = new GeneralResponse
+                {
+                    statusCode = "01",
+                    statusDesc = "Success",
+                    Data = customerList
+                };
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                var customerList = _services.GetListCustomers();
+                var response = new GeneralResponse
+                {
+                    statusCode = "99",
+                    statusDesc = "Failed | " + ex.Message.ToString(),
+                    Data = null
+                };
+                return BadRequest(response);
+            }
         }
 
         [HttpGet("{id}")]
@@ -41,13 +62,38 @@ namespace Training2.Controllers
         [HttpPost]
         public IActionResult Post(Customer customer) //lebih fleksible 
         {
-            var insertCustomer = _services.createCustomer(customer);
-            if (insertCustomer)
+            try
             {
-                return Ok("insert Customer success");
+                var insertCustomer = _services.createCustomer(customer);
+                if (insertCustomer)
+                {
+                    var responseSuccess = new GeneralResponse
+                    {
+                        statusCode = "01",
+                        statusDesc = "insert Customer success",
+                        Data = null
+                    };
+                    return Ok(responseSuccess);
+                }
+                var responseFailed = new GeneralResponse
+                {
+                    statusCode = "02",
+                    statusDesc = "insert Customer Failed",
+                    Data = null
+                };
+
+                return BadRequest(responseFailed);
             }
-            return BadRequest("insert Customer failed");
-            //return StatusCode(StatusCodes.) cari apa aja yg ada di statusCodes
+            catch (Exception ex)
+            {
+                var responseFailed = new GeneralResponse
+                {
+                    statusCode = "99",
+                    statusDesc = "Failed | " + ex.Message.ToString(),
+                    Data = null
+                };
+                return BadRequest(responseFailed);
+            }
         }
 
         
@@ -59,14 +105,31 @@ namespace Training2.Controllers
                 var updateCustomer = _services.UpdateCustomer(customer);
                 if (updateCustomer)
                 {
-                    return Ok("success");
+                    var response = new GeneralResponse
+                    {
+                        statusCode = "01",
+                        statusDesc = "Update Success",
+                        Data = null
+                    };
+                    return Ok(response);
                 }
 
-                return BadRequest("failed");
+                var responseFail = new GeneralResponse
+                {
+                    statusCode = "02",
+                    statusDesc = "Update Failed",
+                    Data = null
+                };
+                return BadRequest(responseFail);
             }
             catch (Exception ex) {
-                return BadRequest(ex.Message.ToString());
-                throw;
+                var responseFail = new GeneralResponse
+                {
+                    statusCode = "99",
+                    statusDesc = "Failed | " + ex.Message.ToString(),
+                    Data = null
+                };
+                return BadRequest(responseFail);
             }
         }
 
@@ -79,13 +142,34 @@ namespace Training2.Controllers
                 var DeleteCust = _services.DeleteCustomer(id);
                 if (DeleteCust)
                 {
+                    var response = new GeneralResponse
+                    {
+                        statusCode = "01",
+                        statusDesc = "Delete Success",
+                        Data = null
+                    };
                     return Ok("success");
                 }
-                return BadRequest("Id Not Found");
+                var responsefail = new GeneralResponse
+                {
+
+                    statusCode = "02",
+                    statusDesc = "Id Not Found",
+                    Data = null
+                };
+
+                return BadRequest(responsefail);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                var responsefail = new GeneralResponse
+                {
+
+                    statusCode = "99",
+                    statusDesc = "Failed | " + ex.Message.ToString(),
+                    Data = null
+                };
+                return BadRequest(responsefail);
             }
         }
     }
