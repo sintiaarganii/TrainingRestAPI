@@ -9,6 +9,7 @@
         public string alamat {  get; set; }
         public string city { get; set; }
         public string PhoneNumber { get; set; }
-
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
     }
 }
