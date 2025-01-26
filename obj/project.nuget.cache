@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "J8i4h98PggI=",
+  "dgSpecHash": "d741gN9XEic=",
   "success": true,
   "projectFilePath": "E:\\PELATIHAN PEMOGRAMAN\\C#\\C# LANJUTAN\\Training2\\Training2.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\sintiaargn\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
     "C:\\Users\\sintiaargn\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\sintiaargn\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\sintiaargn\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",

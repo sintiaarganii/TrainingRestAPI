@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using Training2.Models;
 using Training2.Models.DB;
 using Training2.Models.DTO;
 using Training2.services;
+using Training2.Validator;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,6 +15,7 @@ namespace Training2.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly CustomerServices _services;
+        private ValidationResult _validation;
         private object _context;
         private Customer customer;
 
@@ -94,25 +97,43 @@ namespace Training2.Controllers
         {
             try
             {
-                var insertCustomer = _services.createCustomer(customer);
-                if (insertCustomer)
+                ValidatorRequestCustomer request = new ValidatorRequestCustomer();
+                _validation = request.Validate(customer);
+
+                if (_validation.IsValid)
                 {
-                    var responseSuccess = new GeneralResponse
+                    var insertCustomer = _services.createCustomer(customer);
+                    if (insertCustomer)
                     {
-                        statusCode = "01",
-                        statusDesc = "insert Customer success",
+                        var responseSuccess = new GeneralResponse
+                        {
+                            statusCode = "01",
+                            statusDesc = "insert Customer success",
+                            Data = null
+                        };
+                        return Ok(responseSuccess);
+                    }
+                    var responseFailed = new GeneralResponse
+                    {
+                        statusCode = "02",
+                        statusDesc = "insert Customer Failed",
                         Data = null
                     };
-                    return Ok(responseSuccess);
-                }
-                var responseFailed = new GeneralResponse
-                {
-                    statusCode = "02",
-                    statusDesc = "insert Customer Failed",
-                    Data = null
-                };
 
-                return BadRequest(responseFailed);
+                    return BadRequest(responseFailed);
+                }
+                else
+                {
+                    var responseFailed = new GeneralResponse
+                    {
+                        statusCode = "02",
+                        statusDesc = _validation.ToString(),
+                        Data = null
+                    };
+
+                    return BadRequest(responseFailed);
+                }
+
             }
             catch (Exception ex)
             {
