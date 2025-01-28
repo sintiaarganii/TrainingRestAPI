@@ -17,7 +17,7 @@
   },
   {
     "ContainingType": "Training2.Controllers.CustomerController",
-    "Method": "GetById",
+    "Method": "GetCustomerById",
     "RelativePath": "api/Customer/getCustomerById/{id}",
     "HttpMethod": "GET",
     "IsController": true,
