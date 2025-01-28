@@ -14,8 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Training2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-ImplementBasicAuth
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ec4cc1408e3dcd5630ca2116ccff67b115c4384")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23344fac6bc5e8423ff1c2baeaf256b42d27e5a1")]
 [assembly: System.Reflection.AssemblyProductAttribute("Training2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Training2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
